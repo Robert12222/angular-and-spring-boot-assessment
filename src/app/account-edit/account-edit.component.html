@@ -1,0 +1,26 @@
+<mat-card>
+  <form #accountForm="ngForm" (ngSubmit)="save(accountForm.value)">
+    <mat-card-header>
+      <mat-card-title><h2>{{account.name ? 'Edit' : 'Add'}} Account</h2></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <input type="hidden" name="href" [(ngModel)]="account.href">
+      <mat-form-field>
+        <input matInput placeholder="Account Name" [(ngModel)]="account.name"
+               required name="name" #name>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit"
+              [disabled]="!accountForm.form.valid">Save</button>
+      <button mat-raised-button color="secondary" (click)="remove(account.href)"
+              *ngIf="account.href" type="button">Delete</button>
+      <a mat-button routerLink="/account-list">Cancel</a>
+    </mat-card-actions>
+    <mat-card-footer>
+      <div class="giphy">
+        <img src="{{account.giphyUrl}}" alt="{{account.name}}">
+      </div>
+    </mat-card-footer>
+  </form>
+</mat-card>
